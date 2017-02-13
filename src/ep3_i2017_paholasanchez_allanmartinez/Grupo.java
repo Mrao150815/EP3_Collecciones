@@ -6,8 +6,7 @@
     Alumnos: Pahola Karina Sanchez Flores SFPO150125
              Martinez Ramirez Allan Axel  MROA150815
     Fecha: 18 de Febrero del 2017
-    Decripcion de la clase: calse principal, donde se instancea la agenda.
-    
+    Decripcion de la clase: Guarda los datos generales del grupo
  */
 package ep3_i2017_paholasanchez_allanmartinez;
 
@@ -15,13 +14,8 @@ package ep3_i2017_paholasanchez_allanmartinez;
  *
  * @author PC21
  */
-public class EP3_I2017_PaholaSanchez_AllanMartinez {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-    }
+public class Grupo {
+    private String nombre;
+    private String descripcion;
     
 }

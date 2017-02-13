@@ -6,7 +6,8 @@
     Alumnos: Pahola Karina Sanchez Flores SFPO150125
              Martinez Ramirez Allan Axel  MROA150815
     Fecha: 18 de Febrero del 2017
-    Decripcion de la clase: calse principal, donde se instancea la agenda.
+    Decripcion de la clase: Calse fecha se utiliza para comparar y validar fechas,
+    asi mismo da el formato al guardarlo.
     
  */
 package ep3_i2017_paholasanchez_allanmartinez;
@@ -15,13 +16,10 @@ package ep3_i2017_paholasanchez_allanmartinez;
  *
  * @author PC21
  */
-public class EP3_I2017_PaholaSanchez_AllanMartinez {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        
-    }
-    
+class Fecha {
+    private int dia;
+    private int anio;
+    private int mes;
+    private static final int ANIOZERO=1900;
+    private static final int ANIOACTUAL=2017;
 }
