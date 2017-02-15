@@ -10,17 +10,25 @@
  */
 package ep3_i2017_paholasanchez_allanmartinez;
 
+import java.util.Scanner;
+
 /**
  *
  * @author PC21
  */
-public class Grupo {
+public class Grupo implements Comparable {
     private String nombre;
     private String descripcion;
 
     public Grupo() {
     }
-
+    public void ingresarDatos(){
+        Scanner teclado=new Scanner(System.in);
+        System.out.println("Ingresa el nombre del grupo");
+        nombre=teclado.nextLine();
+        System.out.println("Ingresa una descripcion");
+        descripcion=teclado.nextLine();
+    }
     public Grupo(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -30,5 +38,27 @@ public class Grupo {
     public String toString() {
         return "Grupo{" + "nombre=" + nombre + ", descripcion=" + descripcion + '}';
     }
+
+    @Override
+    public int compareTo(Object t) {
+        return nombre.compareToIgnoreCase(((Grupo)t).nombre);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    
     
 }

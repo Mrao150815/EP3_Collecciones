@@ -46,7 +46,7 @@ public class Contacto implements Comparable {
         return nombre;
     }
 
-    public void ingresarDatos() {
+    public void ingresarDatos()  {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Ingresa el nombre del contacto");
         nombre = teclado.nextLine();

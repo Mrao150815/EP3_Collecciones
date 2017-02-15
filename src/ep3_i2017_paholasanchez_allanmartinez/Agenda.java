@@ -36,19 +36,32 @@ public class Agenda {
         agenda = new HashMap<Grupo, LinkedList<Contacto>>();
     }
 
-    public void insertarGrupo() {
-        Grupo uno = new Grupo("grupoA", "GrupoPrueba");
-        LinkedList<Contacto> dos = new LinkedList<Contacto>();
-        //Que no exista el grupo 
-        agenda.put(uno, insertarContactos(new LinkedList<Contacto>()));
 
+public void insertarGrupo() {
+        Grupo uno = new Grupo();
+        uno.ingresarDatos();
+        LinkedList<Contacto> dos = new LinkedList<Contacto>();
+        //Que no exista el grupo     
+        agenda.put(uno, insertarContactos(new LinkedList<Contacto>()));
     }
 
+    
     @Override
     public String toString() {
         return "Agenda{" + "nombre=" + nombre + ", descripcion=" + descripcion + ", agenda=" + agenda + '}';
     }
-
+ public Grupo buscarGrupo(String grupo){
+     Iterator i;
+     Grupo aux;
+     i=agenda.keySet().iterator();
+     while(i.hasNext()){
+         aux=(Grupo) i.next();
+        if(aux.getNombre().compareTo(grupo)==0){
+            return aux;
+     }
+     }
+     return null;
+ }
     public LinkedList<Contacto> insertarContactos(LinkedList<Contacto> aux) {
         Contacto contacto;
         Scanner teclado = new Scanner(System.in);
@@ -61,7 +74,7 @@ public class Agenda {
                 case 1:
                     contacto = new Contacto();
                     contacto.ingresarDatos();
-                    aux = ordenar(aux, contacto);
+                    aux.add(ordenar(aux, contacto),contacto);
                     System.out.println(aux);
                     break;
                 case 0:
@@ -75,17 +88,16 @@ public class Agenda {
         return aux;
     }
 
-    public LinkedList<Contacto> ordenar(LinkedList<Contacto> agenda, Contacto nuevo) {
-        if (agenda.size() == 0) {
-            agenda.add(nuevo);
+    public int ordenar(LinkedList<Contacto> agenda, Contacto nuevo) {
+        if (agenda.isEmpty()) {
+            return 0;
         } else {
             for (int i = 0; i < agenda.size(); i++) {
                 if (nuevo.compareTo(agenda.get(i)) > 0 || nuevo.compareTo(agenda.get(i)) == 0) {
-                    agenda.add(i, nuevo);
-                    return agenda;
+                    return i;
                 }
             }
         }
-        return agenda;
+        return 1;
     }
 }
