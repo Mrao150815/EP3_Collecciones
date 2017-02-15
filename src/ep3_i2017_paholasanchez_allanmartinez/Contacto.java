@@ -11,6 +11,8 @@
  */
 package ep3_i2017_paholasanchez_allanmartinez;
 
+import java.util.Scanner;
+
 public class Contacto {
    private String nombre;
    private String apellido;
@@ -21,4 +23,127 @@ public class Contacto {
    private float deuda;
    private char sexo;
    private String direccion;
+
+    public Contacto() {
+       fechaNac=new Fecha();
+    }
+    /*Constructores*/
+    public Contacto(String nombre, String apellido, String correo, String numTelefono, String numCelular, Fecha fechaNac, float deuda, char sexo, String direccion) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.correo = correo;
+        this.numTelefono = numTelefono;
+        this.numCelular = numCelular;
+        this.fechaNac = fechaNac;
+        this.deuda = deuda;
+        this.sexo = sexo;
+        this.direccion = direccion;
+    }
+    
+    
+    
+    public String getNombre() {
+        return nombre;
+    }
+   public void ingresarDatos(){
+       Scanner teclado=new Scanner(System.in);
+       System.out.println("Ingresa el nombre del contacto");
+       nombre=teclado.nextLine();
+       System.out.println("Ingresa el apellido del contacto");
+       apellido=teclado.nextLine();
+       /*System.out.println("Ingresa el correo de: "+ nombre);
+       correo=teclado.nextLine();
+       //El num de contactacto contiene letras0
+       System.out.println("Ingresa el numero fijo");
+       numTelefono=teclado.nextLine();
+       System.out.println("Ingresa el numero celular");
+       numCelular=teclado.nextLine();
+       System.out.println("Ingresa la fecha de nacimiento");
+       //Hacer el metodo para ingresar fecha en la clase fecha
+       System.out.println("Ingresa la direccion de: "+nombre);
+       direccion=teclado.nextLine();
+       System.out.println("Ingresa la deuda del contacto");
+       deuda=teclado.nextFloat();
+       //Que los datos ingresados en el sexo sean diferentes a M o F 
+       /*System.out.println("Ingresa el sexo F (femenino) o M (masculino)");
+       sexo=(char)teclado.next();
+       */
+       }
+    
+    /*Metdos SET y GET*/
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getNumTelefono() {
+        return numTelefono;
+    }
+
+    public void setNumTelefono(String numTelefono) {
+        this.numTelefono = numTelefono;
+    }
+
+    public String getNumCelular() {
+        return numCelular;
+    }
+
+    public void setNumCelular(String numCelular) {
+        this.numCelular = numCelular;
+    }
+
+    public Fecha getFechaNac() {
+        return fechaNac;
+    }
+
+    public void setFechaNac(Fecha fechaNac) {
+        this.fechaNac = fechaNac;
+    }
+
+    public float getDeuda() {
+        return deuda;
+    }
+
+    public void setDeuda(float deuda) {
+        this.deuda = deuda;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    @Override
+    public String toString() {
+        return "Contacto{" + "nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", numTelefono=" + numTelefono + ", numCelular=" + numCelular + ", fechaNac=" + fechaNac + ", deuda=" + deuda + ", sexo=" + sexo + ", direccion=" + direccion + '}';
+    }
+   
+   
 }

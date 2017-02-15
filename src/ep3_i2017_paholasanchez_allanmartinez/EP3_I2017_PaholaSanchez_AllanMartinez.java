@@ -21,7 +21,9 @@ public class EP3_I2017_PaholaSanchez_AllanMartinez {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        Agenda agendaCont= new Agenda();
+        agendaCont.insertarGrupo();
+        System.out.println(agendaCont.toString());
     }
     
 }

@@ -17,5 +17,18 @@ package ep3_i2017_paholasanchez_allanmartinez;
 public class Grupo {
     private String nombre;
     private String descripcion;
+
+    public Grupo() {
+    }
+
+    public Grupo(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Grupo{" + "nombre=" + nombre + ", descripcion=" + descripcion + '}';
+    }
     
 }
