@@ -13,20 +13,22 @@ package ep3_i2017_paholasanchez_allanmartinez;
 
 import java.util.Scanner;
 
-public class Contacto {
-   private String nombre;
-   private String apellido;
-   private String correo;   
-   private String numTelefono;
-   private String numCelular;
-   private Fecha fechaNac;
-   private float deuda;
-   private char sexo;
-   private String direccion;
+public class Contacto implements Comparable {
+
+    private String nombre;
+    private String apellido;
+    private String correo;
+    private String numTelefono;
+    private String numCelular;
+    private Fecha fechaNac;
+    private float deuda;
+    private char sexo;
+    private String direccion;
 
     public Contacto() {
-       fechaNac=new Fecha();
+        fechaNac = new Fecha();
     }
+
     /*Constructores*/
     public Contacto(String nombre, String apellido, String correo, String numTelefono, String numCelular, Fecha fechaNac, float deuda, char sexo, String direccion) {
         this.nombre = nombre;
@@ -39,19 +41,18 @@ public class Contacto {
         this.sexo = sexo;
         this.direccion = direccion;
     }
-    
-    
-    
+
     public String getNombre() {
         return nombre;
     }
-   public void ingresarDatos(){
-       Scanner teclado=new Scanner(System.in);
-       System.out.println("Ingresa el nombre del contacto");
-       nombre=teclado.nextLine();
-       System.out.println("Ingresa el apellido del contacto");
-       apellido=teclado.nextLine();
-       /*System.out.println("Ingresa el correo de: "+ nombre);
+
+    public void ingresarDatos() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Ingresa el nombre del contacto");
+        nombre = teclado.nextLine();
+        System.out.println("Ingresa el apellido del contacto");
+        apellido = teclado.nextLine();
+        /*System.out.println("Ingresa el correo de: "+ nombre);
        correo=teclado.nextLine();
        //El num de contactacto contiene letras0
        System.out.println("Ingresa el numero fijo");
@@ -67,11 +68,10 @@ public class Contacto {
        //Que los datos ingresados en el sexo sean diferentes a M o F 
        /*System.out.println("Ingresa el sexo F (femenino) o M (masculino)");
        sexo=(char)teclado.next();
-       */
-       }
-    
+         */
+    }
+
     /*Metdos SET y GET*/
-    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -142,8 +142,26 @@ public class Contacto {
 
     @Override
     public String toString() {
-        return "Contacto{" + "nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", numTelefono=" + numTelefono + ", numCelular=" + numCelular + ", fechaNac=" + fechaNac + ", deuda=" + deuda + ", sexo=" + sexo + ", direccion=" + direccion + '}';
+        return "Contacto{" + "nombre=" + nombre + ", apellido=" + apellido ;
     }
-   
-   
+
+    @Override
+    public int compareTo(Object t) {
+        if (apellido.compareTo(((Contacto) t).apellido) < 0) {
+            return 1;
+        } else {
+            if (apellido.compareTo(((Contacto) t).apellido) == 0) {
+                if (nombre.compareTo(((Contacto) t).nombre) < 0) {
+                    return 1;
+                } else if (nombre.compareTo(((Contacto) t).nombre) == 0) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+            return -1;
+        }
+
+    }
+
 }
