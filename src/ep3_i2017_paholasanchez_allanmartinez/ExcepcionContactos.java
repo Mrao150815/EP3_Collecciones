@@ -20,6 +20,9 @@ public class ExcepcionContactos extends Exception {
     public void contactoNoEncontrado(){
         System.err.println("El contacto no se encontro");
     }
+    public void errorAlOrdenar(){
+        System.err.println("Error al ordenar contactos");
+    }
     /**
      * Constructs an instance of <code>ExcepcionContactos</code> with the
      * specified detail message.

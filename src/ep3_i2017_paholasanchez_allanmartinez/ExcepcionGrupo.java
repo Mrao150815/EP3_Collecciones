@@ -20,6 +20,9 @@ public class ExcepcionGrupo extends Exception {
     public void grupoNoEncontrado(){
         System.err.println("El grupo no fue encontrado");
     }
+    public void grupoExiste(){
+        System.err.println("El grupo ya existe");
+    }
     /**
      * Constructs an instance of <code>ExcepcionGrupoContactos</code> with the
      * specified detail message.

@@ -16,6 +16,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,17 +39,32 @@ public class Agenda {
         agenda = new HashMap<Grupo, LinkedList<Contacto>>();
     }
 
-    public void insertarGrupo() {
+    public void insertarGrupo() throws ExcepcionGrupo {
         Grupo grupo = new Grupo();
         grupo.ingresarDatos();
-        //Que no exista el grupo     
-        agenda.put(grupo, new LinkedList<Contacto>());
-        insertarContactos(grupo);
+        //Que no exista el grupo
+        if (!agenda.containsKey(grupo)) {
+            agenda.put(grupo, new LinkedList<Contacto>());
+            insertarContactos(grupo);
+        } else {
+            throw new ExcepcionGrupo();
+        }
+
     }
 
     @Override
     public String toString() {
         return "Agenda{" + "nombre=" + nombre + ", descripcion=" + descripcion + ", agenda=" + agenda + '}';
+    }
+
+    public Grupo buscarGrupo(Grupo grupo) {
+        Scanner teclado = new Scanner(System.in);
+        String apellido, nombre;
+        System.out.println("Ingresa el nombre del contacto");
+        nombre = teclado.nextLine();
+        System.out.println("Ingresa el apellido del contacto");
+        apellido = teclado.nextLine();
+        return null;
     }
 
     public Grupo buscarGrupo(String grupo) throws ExcepcionGrupo {
@@ -67,37 +84,42 @@ public class Agenda {
         Contacto contacto;
         Scanner teclado = new Scanner(System.in);
         int opc;
-        do {
-            System.out.println("1.- Añadir un contacto");
-            System.out.println("0- Salir");
-            opc = teclado.nextInt();
-            switch (opc) {
-                case 1:
-                    contacto = new Contacto();
-                    contacto.ingresarDatos();
-                    agenda.get(grupo).add(ordenar(grupo, contacto), contacto);
-                    break;
-                case 0:
-                    System.out.println("Saliendo...");
-                    break;
-                default:
-                    System.err.println("Opcion incorrecta");
-            }
-        } while (opc != 0);
-
+        try {
+            do {
+                System.out.println("1.- Añadir un contacto");
+                System.out.println("0- Salir");
+                opc = teclado.nextInt();
+                switch (opc) {
+                    case 1:
+                        contacto = new Contacto();
+                        contacto.ingresarDatos();
+                        agenda.get(grupo).add(ordenar(grupo, contacto), contacto);
+                        break;
+                    case 0:
+                        System.out.println("Saliendo...");
+                        break;
+                    default:
+                        System.err.println("Opcion incorrecta");
+                }
+            } while (opc != 0);
+            
+        } catch (ExcepcionContactos ex) {
+           ex.errorAlOrdenar();
+        }
     }
 
-    public int ordenar(Grupo grupo, Contacto nuevo) {
+    public int ordenar(Grupo grupo, Contacto nuevo) throws ExcepcionContactos {
         if (agenda.get(grupo).isEmpty()) {
             return 0;
         } else {
             for (int i = 0; i < agenda.get(grupo).size(); i++) {
-                if (nuevo.compareTo(agenda.get(grupo).get(i)) > 0 || nuevo.compareTo(agenda.get(grupo).get(i)) == 0) {
+                if (nuevo.compareTo(agenda.get(grupo).get(i)) <=0) {
                     return i;
                 }
             }
+            return agenda.get(grupo).size();
         }
-        return 1;
+        
     }
 
     public boolean eliminarContacto(Grupo grupo, String nombre, String apellido) throws ExcepcionContactos {
@@ -153,10 +175,15 @@ public class Agenda {
         Grupo grAux;
         Contacto contAux;
         switch (opc) {
-            case 1:
-                //Ingresar un grupo;
-                insertarGrupo();
-                break;
+            case 1: {
+                try {
+                    //Ingresar un grupo;
+                    insertarGrupo();
+                } catch (ExcepcionGrupo ex) {
+                    ex.grupoExiste();
+                }
+            }
+            break;
 
             case 2://Agregar tarjeta de contacto a un grupo existente
                 System.out.println("Ingresa el nombre del grupo: ");
@@ -168,11 +195,12 @@ public class Agenda {
                             contAux = new Contacto();
                             contAux.ingresarDatos();
                             agenda.get(grAux).add(ordenar(grAux, contAux), contAux);
-                            //agenda.get(stAux).add(insertarContactos());
                             System.out.println("Deseas añadir otro contacto presiona 1[SI] [0]NO");
                         } while (teclado.nextInt() != 0);
                     } catch (ExcepcionGrupo ex) {
                         ex.grupoNoEncontrado();
+                    } catch (ExcepcionContactos ex) {
+                        ex.errorAlOrdenar();
                     }
                 }
                 break;
@@ -226,6 +254,17 @@ public class Agenda {
                 break;
 
             case 7://Consultar un grupo
+                System.out.println("Ingresa el nombre del grupo");
+                stAux = teclado.nextLine();
+                 {
+                    try {
+                        grAux = buscarGrupo(stAux);
+                        grAux.mostrarDatos();
+                        mostrarContactos(grAux);
+                    } catch (ExcepcionGrupo ex) {
+                        ex.grupoNoEncontrado();
+                    }
+                }
                 break;
 
             case 8://Consultar un contacto
@@ -265,7 +304,6 @@ public class Agenda {
             arbol.addAll(agenda.get(grupoAux).subList(0, agenda.get(grupoAux).size()));
 
         }
-        System.out.println(arbol.size());
         imprimirContactosEspecial(arbol, "sin repetir encontrados: ");
     }
 
@@ -287,10 +325,10 @@ public class Agenda {
         Contacto auxCont;
         while (i.hasNext()) {
             grupoAux = (Grupo) i.next();
-            j=agenda.get(grupoAux).iterator();
+            j = agenda.get(grupoAux).iterator();
             while (j.hasNext()) {
-                auxCont=j.next();
-                if(compararContacto(auxCont)!=null){
+                auxCont = j.next();
+                if (compararContacto(auxCont) != null) {
                     arbol.add(auxCont);
                 }
             }
@@ -298,24 +336,25 @@ public class Agenda {
 
         imprimirContactosEspecial(arbol, "encontrados en varios grupos ");
     }
-    public Contacto compararContacto(Contacto repetido){
-        Iterator<Grupo> i=agenda.keySet().iterator();
+
+    public Contacto compararContacto(Contacto repetido) {
+        Iterator<Grupo> i = agenda.keySet().iterator();
         Grupo aux;
-        int cont=0;
-         System.out.println("s");
-        while(i.hasNext()){
-               System.out.println("e");     
-            aux=i.next();
-            if(agenda.get(aux).contains(repetido)){
+        int cont = 0;
+        System.out.println("s");
+        while (i.hasNext()) {
+            System.out.println("e");
+            aux = i.next();
+            if (agenda.get(aux).contains(repetido)) {
                 repetido.mostrarDatos();
-                   
+
                 cont++;
             }
-            
+
         }
-        if(cont>1){
-                return repetido;
-            }
+        if (cont > 1) {
+            return repetido;
+        }
         return null;
     }
 
@@ -339,8 +378,6 @@ public class Agenda {
         }
     }
 
-    private Exception ExcepcionContactos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }

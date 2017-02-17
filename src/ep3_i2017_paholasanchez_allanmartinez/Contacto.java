@@ -11,6 +11,7 @@
  */
 package ep3_i2017_paholasanchez_allanmartinez;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Contacto implements Comparable,ManejoDatos {
@@ -87,7 +88,7 @@ public class Contacto implements Comparable,ManejoDatos {
         
     }
 
-   
+    
     /*Metdos SET y GET*/
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -164,21 +165,42 @@ public class Contacto implements Comparable,ManejoDatos {
 
     @Override
     public int compareTo(Object t) {
-        if (apellido.compareTo(((Contacto) t).apellido) < 0) {
+        if (apellido.compareTo(((Contacto) t).apellido) > 0) {
             return 1;
         } else {
             if (apellido.compareTo(((Contacto) t).apellido) == 0) {
-                if (nombre.compareTo(((Contacto) t).nombre) < 0) {
+                if (nombre.compareTo(((Contacto) t).nombre) > 0) {
                     return 1;
                 } else if (nombre.compareTo(((Contacto) t).nombre) == 0) {
                     return 0;
                 } else {
                     return -1;
                 }
-            }
-            return -1;
-        }
+            }else{
+                if (nombre.compareTo(((Contacto) t).nombre) > 0) {
+                    return 1;
+                } else if (nombre.compareTo(((Contacto) t).nombre) == 0) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }   
+           }
+    }
 
+    @Override 
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.nombre);
+        hash = 37 * hash + Objects.hashCode(this.apellido);
+        return hash;
+    }
+    @Override
+    public boolean equals(Object t){
+        if(t instanceof Contacto){
+            return nombre.equals(((Contacto) t).nombre) && apellido.equals(((Contacto) t).apellido);
+        }
+        return false;
     }
 
 }

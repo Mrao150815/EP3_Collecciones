@@ -10,6 +10,7 @@
  */
 package ep3_i2017_paholasanchez_allanmartinez;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -52,6 +53,19 @@ public class Grupo implements Comparable,ManejoDatos {
         return nombre.compareTo(((Grupo)t).getNombre());
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.nombre);
+        return hash;
+    }
+   public boolean equals(Object t){
+        if(t instanceof Grupo){
+            return nombre.equals(((Grupo) t).nombre);
+        }
+        return false;
+    }
+    
     public String getNombre() {
         return nombre;
     }
