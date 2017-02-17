@@ -23,6 +23,9 @@ public class EP3_I2017_PaholaSanchez_AllanMartinez {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        
+        
         menu();
         
         
@@ -35,7 +38,7 @@ public class EP3_I2017_PaholaSanchez_AllanMartinez {
             System.out.println("Ingresa el nombre del grupo");
             nombre=t.nextLine();
             agendaCont.buscarGrupo(nombre);
-        */
+            */
     }
     
     
