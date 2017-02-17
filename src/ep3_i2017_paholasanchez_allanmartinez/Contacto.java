@@ -13,7 +13,7 @@ package ep3_i2017_paholasanchez_allanmartinez;
 
 import java.util.Scanner;
 
-public class Contacto implements Comparable {
+public class Contacto implements Comparable,ManejoDatos {
 
     private String nombre;
     private String apellido;
@@ -30,6 +30,13 @@ public class Contacto implements Comparable {
     }
 
     /*Constructores*/
+    
+    public Contacto(String nombre, String apellido) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        
+    }
+
     public Contacto(String nombre, String apellido, String correo, String numTelefono, String numCelular, Fecha fechaNac, float deuda, char sexo, String direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -46,7 +53,8 @@ public class Contacto implements Comparable {
         return nombre;
     }
 
-    public void ingresarDatos()  {
+    @Override
+    public void ingresarDatos() {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Ingresa el nombre del contacto");
         nombre = teclado.nextLine();
@@ -71,6 +79,15 @@ public class Contacto implements Comparable {
          */
     }
 
+    @Override
+    public void mostrarDatos() {
+        System.out.println("\t\tNombre contacto: " + nombre);
+        System.out.println("\t\tApellido contacto: " + apellido);
+        System.out.println("\n");
+        
+    }
+
+   
     /*Metdos SET y GET*/
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -142,7 +159,7 @@ public class Contacto implements Comparable {
 
     @Override
     public String toString() {
-        return "Contacto{" + "nombre=" + nombre + ", apellido=" + apellido ;
+        return "Contacto{" + "nombre=" + nombre + ", apellido=" + apellido;
     }
 
     @Override

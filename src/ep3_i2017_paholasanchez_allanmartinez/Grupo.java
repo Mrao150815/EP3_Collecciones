@@ -16,18 +16,26 @@ import java.util.Scanner;
  *
  * @author PC21
  */
-public class Grupo implements Comparable {
+public class Grupo implements Comparable,ManejoDatos {
     private String nombre;
     private String descripcion;
 
     public Grupo() {
     }
+    @Override
     public void ingresarDatos(){
         Scanner teclado=new Scanner(System.in);
         System.out.println("Ingresa el nombre del grupo");
         nombre=teclado.nextLine();
         System.out.println("Ingresa una descripcion");
         descripcion=teclado.nextLine();
+    }
+    @Override
+    public void mostrarDatos(){
+        System.out.println("\tNombre grupo: "+nombre);
+        System.out.println("\tDescripcion grupo:"+descripcion+"\n");
+        
+        
     }
     public Grupo(String nombre, String descripcion) {
         this.nombre = nombre;
@@ -41,7 +49,7 @@ public class Grupo implements Comparable {
 
     @Override
     public int compareTo(Object t) {
-        return nombre.compareToIgnoreCase(((Grupo)t).nombre);
+        return nombre.compareTo(((Grupo)t).getNombre());
     }
 
     public String getNombre() {
