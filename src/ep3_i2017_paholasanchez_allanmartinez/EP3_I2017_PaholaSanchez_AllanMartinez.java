@@ -25,19 +25,6 @@ public class EP3_I2017_PaholaSanchez_AllanMartinez {
     public static void main(String[] args) {
         Agenda agendaCont= new Agenda();
         agendaCont.menu();
-        
-        
-        
-            /*Agenda agendaCont= new Agenda();
-            Scanner t= new Scanner (System.in);
-            String nombre;
-            agendaCont.insertarGrupo();
-            System.out.println(agendaCont.toString());
-            System.out.println("Ingresa el grupo a buscar");
-            System.out.println("Ingresa el nombre del grupo");
-            nombre=t.nextLine();
-            agendaCont.buscarGrupo(nombre);
-            */
     }
     
     

@@ -18,7 +18,7 @@ import java.util.Scanner;
  *
  * @author PC21
  */
-class Fecha {
+class Fecha implements Comparable {
     private int dia;
     private int anio;
     private int mes;
@@ -94,6 +94,11 @@ class Fecha {
     @Override
     public String toString() {
         return "Fecha{" + dia + "/" + mes + "/" + anio + '}';
+    }
+
+    @Override
+    public int compareTo(Object t) {
+        return  1;
     }
     
     

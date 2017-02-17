@@ -203,4 +203,9 @@ public class Contacto implements Comparable,ManejoDatos {
         return false;
     }
 
+    @Override
+    public void modificarDatos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
