@@ -24,10 +24,12 @@ import java.util.logging.Logger;
  * @author PC21
  */
 public class Agenda {
+
     private String nombre;
     private String descripcion;
     private HashMap<Grupo, LinkedList<Contacto>> agenda;
-/*CONSTRUCTORES*/
+
+    /*CONSTRUCTORES*/
     public Agenda(String nombre, String descripcion, HashMap<Grupo, LinkedList<Contacto>> agenda) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -38,6 +40,7 @@ public class Agenda {
         agenda = new HashMap<Grupo, LinkedList<Contacto>>();
     }
 //Metodo para insertar la informacion del grupo
+
     public void insertarGrupo() throws ExcepcionGrupo {
         Grupo grupo = new Grupo();
         grupo.ingresarDatos();
@@ -51,11 +54,13 @@ public class Agenda {
 
     }
 //Metodo toString
+
     @Override
     public String toString() {
         return "Agenda{" + "nombre=" + nombre + ", descripcion=" + descripcion + ", agenda=" + agenda + '}';
     }
 //Metodo para buscar un  contacto utilizando un grupo contacto 
+
     public void buscarContacto(Grupo grupo) throws ExcepcionContactos {
         Scanner teclado = new Scanner(System.in);
         Contacto aux, aux2;
@@ -65,19 +70,16 @@ public class Agenda {
         nombre = teclado.nextLine();
         System.out.println("\t\t>Ingresa el apellido del contacto: ");
         apellido = teclado.nextLine();
-        aux=new Contacto(nombre,apellido);
-        i=agenda.get(aux).listIterator();
-        for (int j = 0; j <agenda.get(grupo).size(); j++) {
-            if(aux.compareTo(agenda.get(grupo).get(j))==0){
+        aux = new Contacto(nombre, apellido);
+        i = agenda.get(aux).listIterator();
+        for (int j = 0; j < agenda.get(grupo).size(); j++) {
+            if (aux.compareTo(agenda.get(grupo).get(j)) == 0) {
                 agenda.get(grupo).get(j).mostrarDatos();
             }
         }
         throw new ExcepcionContactos();
     }
-    
-  
-    
-    
+
 //Metodfo para buscar un grupo en la agenda y lo retorna.
     public Grupo buscarGrupo(String grupo) throws ExcepcionGrupo {
         Iterator i;
@@ -91,27 +93,26 @@ public class Agenda {
         }
         throw new ExcepcionGrupo();
     }
-    
-    
-    public boolean modGrupo(String grupo)throws ExcepcionGrupo{
-        Scanner sc = new Scanner (System.in);//esta variable leera
+
+    public boolean modGrupo(String grupo) throws ExcepcionGrupo {
+        Scanner sc = new Scanner(System.in);//esta variable leera
         Iterator i;//iterara en el treemap
         Grupo aux;//ayuda a guardar lo leido
         i = agenda.keySet().iterator();
         while (i.hasNext()) {
             aux = (Grupo) i.next();//se guarda loo que se lee
             if (aux.getNombre().compareTo(grupo) == 0) {//se compara que el nombre del grupo leido sea igua al nombre del grupo buscado
-                 System.out.println("\t>Nuevos datos para el grupo: ");//si es igual pide los nuevos datos
-                 System.out.println("\t>Nuevo nombre: ");
-                 aux.setNombre(sc.nextLine());//cambia el nombre
-                 System.out.println("\t>Nueva descripcion: ");
-                 aux.setDescripcion(sc.nextLine());//cambia la descripcion
-                 return true;//retorna verdadero si se cambio
+                System.out.println("\tNuevos datos para el grupo: ");//si es igual pide los nuevos datos
+                System.out.println("\tNuevo nombre: ");
+                aux.setNombre(sc.nextLine());//cambia el nombre
+                System.out.println("\tNueva descripcion: ");
+                aux.setDescripcion(sc.nextLine());//cambia la descripcion
+                return true;//retorna verdadero si se cambio
             }
         }
         throw new ExcepcionGrupo();//si no se encuentra lanza la excepcion
     }
-    
+
 //Metodo para insertar contactos cuando se crea un grupo
     public void insertarContactos(Grupo grupo) {
         Contacto contacto;
@@ -141,6 +142,7 @@ public class Agenda {
         }
     }
 //Metodo para insertar ordenadamente un contacto en un grupo
+
     public int ordenar(Grupo grupo, Contacto nuevo) throws ExcepcionContactos {
         if (agenda.get(grupo).isEmpty()) {
             return 0;
@@ -155,6 +157,7 @@ public class Agenda {
 
     }
 //Metodo para eliminar un contacto
+
     public boolean eliminarContacto(Grupo grupo, String nombre, String apellido) throws ExcepcionContactos {
         Contacto aux = new Contacto(nombre, apellido);
         Contacto aux2;
@@ -174,11 +177,23 @@ public class Agenda {
         throw new ExcepcionContactos();
 
     }
-    
-    
-    
-    
-    
+
+    public boolean modificarContacto(Grupo grupo, Contacto contacto) throws ExcepcionContactos {
+        if (agenda.get(grupo).contains(contacto)) {
+            Iterator<Contacto> i = agenda.get(grupo).iterator();
+            Contacto aux;
+            while (i.hasNext()) {
+                aux = i.next();
+                if (aux.equals(contacto)) {
+                    aux.modificarDatos();
+                    return true;
+                }
+            }
+        }
+        throw new ExcepcionContactos();
+
+    }
+
 //-------------------------------------------------------Menu donde se muestran las opciones de la agenda
     public void menu() {
         Scanner teclado = new Scanner(System.in);
@@ -206,12 +221,14 @@ public class Agenda {
 
     }
 //metodo donde se realizan las opciones del menu
+
     public int menuOpciones(int opc) {
 
         Scanner teclado = new Scanner(System.in);
         String stAux, stAux2, stAux1;
         Grupo grAux;
         Contacto contAux;
+        Fecha fecha;
         switch (opc) {
             case 1: {
                 try {
@@ -262,7 +279,7 @@ public class Agenda {
                 }
                 break;
 
-            case 4://Eliminar una terjeta de grupo
+            case 4://Eliminar una tarjeta de grupo
                 System.out.println("Ingresa el nombre del grupo");
                 stAux = teclado.nextLine();
                  {
@@ -308,36 +325,55 @@ public class Agenda {
                 stAux = teclado.nextLine();
                 try {
                     grAux = buscarGrupo(stAux);
-                     buscarContacto(grAux);
+                    buscarContacto(grAux);
                 } catch (ExcepcionGrupo ex) {
                     ex.grupoNoEncontrado();
-                }catch (ExcepcionContactos ex){
+                } catch (ExcepcionContactos ex) {
                     ex.contactoNoEncontrado();
                 }
                 break;
 
             case 9://Consultar un contacto por su fecha de nacimiento
+                System.out.println("Ingresa la fecha a buscar");
+                fecha=new Fecha();
+                fecha.ingresarDatos();
+                mostrarContactosFecha(fecha);
                 break;
 
             case 10://Modificar un grupo.
-                
+
                 System.out.println("Ingresa el nombre del grupo: ");
                 stAux = teclado.nextLine();
                 try {
-                    if(modGrupo(stAux))
+                    if (modGrupo(stAux)) {
                         System.out.println("Moficado correctamente");
-                    else
+                    } else {
                         System.out.println("No se pudo modificar el grupo");
-                    
+                    }
+
                 } catch (ExcepcionGrupo ex) {
                     ex.grupoNoEncontrado();
                 }
                 break;
-                
-                
+
             case 11://Modificar un contacto
+                System.out.println("Ingresa el nombre del grupo");
+                stAux=teclado.nextLine();
+            try {
+                grAux=buscarGrupo(stAux);
+                System.out.println("Ingresa el nombre del contacto");
+                stAux1=teclado.nextLine();
+                System.out.println("Ingresa el apellido del contacto");
+                stAux2=teclado.nextLine();
+                modificarContacto(grAux,new Contacto(stAux1,stAux2));
+            } catch (ExcepcionGrupo ex) {
+               ex.grupoNoEncontrado();
+            } catch (ExcepcionContactos ex) {
+                ex.contactoNoEncontrado();
+            }
+        
                 
-            break;
+                break;
 
             case 12://ver todo
                 mostrarTodo();
@@ -353,6 +389,7 @@ public class Agenda {
         return opc;
     }
 //Metodo para encontrar todos los contactos que existen en la agenda.
+
     public void encontrarTodosContactos() {
         TreeSet<Contacto> arbol = new TreeSet<Contacto>();
         Iterator i = agenda.keySet().iterator();
@@ -367,6 +404,7 @@ public class Agenda {
         imprimirContactosEspecial(arbol, "sin repetir encontrados: ");
     }
 //Metodo para imprimir un arbol con co0ntactos en especifico
+
     public void imprimirContactosEspecial(TreeSet<Contacto> arbol, String enunciado) {
         System.out.println("Los contactos " + enunciado + " :\n");
         Iterator<Contacto> i = arbol.iterator();
@@ -377,6 +415,7 @@ public class Agenda {
         }
     }
 //Metodo para encontrar contactos que existen en dos o más grupos
+
     public void encontrarContVariosGrup() {
         TreeSet<Contacto> arbol = new TreeSet<Contacto>();
         Iterator i = agenda.keySet().iterator();
@@ -397,6 +436,7 @@ public class Agenda {
         imprimirContactosEspecial(arbol, "encontrados en varios grupos ");
     }
 //Metodo para encontrar cuantas veces un contacto existe en los grupos
+
     public Contacto compararContacto(Contacto repetido) {
         Iterator<Grupo> i = agenda.keySet().iterator();
         Grupo aux;
@@ -418,6 +458,7 @@ public class Agenda {
         return null;
     }
 //Metodo para mostrar todos los contactos y grupos de la agenda
+
     public void mostrarTodo() {
         Iterator i;
         Grupo aux;
@@ -429,6 +470,7 @@ public class Agenda {
         }
     }
 //Metodo para mostrar los contactos de una agenda
+
     public void mostrarContactos(Grupo aux) {
         Iterator<Contacto> i = agenda.get(aux).iterator();
         Contacto auxCont;
@@ -437,4 +479,22 @@ public class Agenda {
             auxCont.mostrarDatos();
         }
     }
+    public void mostrarContactosFecha(Fecha fecha){
+        Iterator<Grupo> i=agenda.keySet().iterator();
+        Iterator<Contacto> j;
+        Contacto auxC;
+        Grupo auxG;
+        while(i.hasNext()){
+            auxG=i.next();
+            auxG.mostrarDatos();
+            j=agenda.get(auxG).iterator();
+            while(j.hasNext()){
+                auxC=j.next();
+                if(auxC.getFechaNac().equals(fecha)){
+                    auxC.mostrarDatos();
+                }
+            }
+        }
+    }
+  
 }

@@ -11,8 +11,11 @@
  */
 package ep3_i2017_paholasanchez_allanmartinez;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Contacto implements Comparable,ManejoDatos {
 
@@ -61,7 +64,9 @@ public class Contacto implements Comparable,ManejoDatos {
         nombre = teclado.nextLine();
         System.out.println("Ingresa el apellido del contacto");
         apellido = teclado.nextLine();
-        /*System.out.println("Ingresa el correo de: "+ nombre);
+        System.out.println("Ingresa la fecha de nacimiento");
+        fechaNac.ingresarDatos();
+        System.out.println("Ingresa el correo de: "+ nombre);
        correo=teclado.nextLine();
        //El num de contactacto contiene letras0
        System.out.println("Ingresa el numero fijo");
@@ -75,23 +80,26 @@ public class Contacto implements Comparable,ManejoDatos {
        System.out.println("Ingresa la deuda del contacto");
        deuda=teclado.nextFloat();
        //Que los datos ingresados en el sexo sean diferentes a M o F 
-       /*System.out.println("Ingresa el sexo F (femenino) o M (masculino)");
-       sexo=(char)teclado.next();
-         */
+       System.out.println("Ingresa el sexo F (femenino) o M (masculino)");
+        try {
+            sexo=(char) System.in.read();
+        } catch (IOException ex) {
+            Logger.getLogger(Contacto.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public void mostrarDatos() {
         System.out.println("\t\t- Nombre contacto: " + nombre);
         System.out.println("\t\t- Apellido contacto: " + apellido);
-        /*System.out.println("\t\t- Correo: "+correo);
+        System.out.println("\t\t- Correo: "+correo);
         System.out.println("\t\t- Numero telefono fijo: "+numTelefono);
         System.out.println("\t\t- Numero telefono celular: "+numCelular);
         System.out.println("\t\t- Fecha de nacimiento: "+fechaNac);
         System.out.println("\t\t- Deuda:"+deuda);
         System.out.println("\t\t- Sexo: "+sexo);
         System.out.println("\t\t- Direccion:"+direccion);
-        System.out.println("\n");*/
+        System.out.println("\n");
         
     }
 
@@ -210,9 +218,77 @@ public class Contacto implements Comparable,ManejoDatos {
         return false;
     }
 
+    public void menuModificar(){
+        System.out.println("Escoge una opcion para modificar");
+        System.out.println("1.- Nombre");
+        System.out.println("2.- Apellido");
+        System.out.println("3.- Correo");
+        System.out.println("4.- Telefono fijo");
+        System.out.println("5.- Telefono celular");
+        System.out.println("6.- Fecha de Nacimiento");
+        System.out.println("7.- Deuda ");
+        System.out.println("8.- Sexo");
+        System.out.println("9.- Direccion");
+    }
     @Override
     public void modificarDatos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       Scanner teclado= new Scanner(System.in);
+       Scanner teclado2=new Scanner(System.in);
+       int opc;
+       do{
+       menuModificar();
+       opc=teclado2.nextInt();
+           switch (opc){
+               case 1:
+                   System.out.println("Ingresa el nuevo nombre");
+                   setNombre(teclado.nextLine());
+                   break;
+               case 2:
+                   System.out.println("Ingresa el nuevo apellido");
+                   setApellido(teclado.nextLine());
+                   break;
+               case 3:
+                   System.out.println("Ingresa el nuevo correo");
+                   setCorreo(teclado.nextLine());
+                break;
+               case 4:
+                   System.out.println("Ingresa el nuevo telefono");
+                   setNumTelefono(teclado.nextLine());
+                   break;
+               case 5:
+                   System.out.println("Ingresa el nuevo celular");
+                   setNumCelular(teclado.nextLine());
+                   break;
+               case 6:
+                   System.out.println("Ingresa la nueva fecha de Nacimiento");
+                   fechaNac.modificarDatos();
+                   break;
+               case 7:
+                   System.out.println("Ingresa la nueva deuda del contacto");
+                   setDeuda(teclado.nextFloat());
+                   break;
+               case 8:
+                   System.out.println("El sexo se ah cambiado");
+                   if(sexo=='M'){
+                       sexo='F';
+                   }else{
+                       if(sexo=='F')
+                           sexo='M';
+                       else
+                           sexo='?';
+                   }
+                   break;
+               case 9:
+                   System.out.println("Ingresa la nueva Direccion");
+                   setDireccion(teclado.nextLine());
+                   break;
+               case 0:
+                   System.out.println("Saliedno...");
+                   break;
+               default:
+                   System.err.println("Opcion Incorrecta");
+           }
+       }while(opc!=0);
     }
 
 }
