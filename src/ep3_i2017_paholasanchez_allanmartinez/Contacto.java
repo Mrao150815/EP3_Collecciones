@@ -82,9 +82,16 @@ public class Contacto implements Comparable,ManejoDatos {
 
     @Override
     public void mostrarDatos() {
-        System.out.println("\t\tNombre contacto: " + nombre);
-        System.out.println("\t\tApellido contacto: " + apellido);
-        System.out.println("\n");
+        System.out.println("\t\t- Nombre contacto: " + nombre);
+        System.out.println("\t\t- Apellido contacto: " + apellido);
+        /*System.out.println("\t\t- Correo: "+correo);
+        System.out.println("\t\t- Numero telefono fijo: "+numTelefono);
+        System.out.println("\t\t- Numero telefono celular: "+numCelular);
+        System.out.println("\t\t- Fecha de nacimiento: "+fechaNac);
+        System.out.println("\t\t- Deuda:"+deuda);
+        System.out.println("\t\t- Sexo: "+sexo);
+        System.out.println("\t\t- Direccion:"+direccion);
+        System.out.println("\n");*/
         
     }
 

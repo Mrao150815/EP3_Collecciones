@@ -61,9 +61,9 @@ public class Agenda {
         Contacto aux, aux2;
         Iterator<Contacto> i;
         String apellido, nombre;
-        System.out.println("Ingresa el nombre del contacto");
+        System.out.println("\t\t>Ingresa el nombre del contacto: ");
         nombre = teclado.nextLine();
-        System.out.println("Ingresa el apellido del contacto");
+        System.out.println("\t\t>Ingresa el apellido del contacto: ");
         apellido = teclado.nextLine();
         aux=new Contacto(nombre,apellido);
         i=agenda.get(aux).listIterator();
@@ -74,6 +74,10 @@ public class Agenda {
         }
         throw new ExcepcionContactos();
     }
+    
+  
+    
+    
 //Metodfo para buscar un grupo en la agenda y lo retorna.
     public Grupo buscarGrupo(String grupo) throws ExcepcionGrupo {
         Iterator i;
@@ -87,6 +91,27 @@ public class Agenda {
         }
         throw new ExcepcionGrupo();
     }
+    
+    
+    public boolean modGrupo(String grupo)throws ExcepcionGrupo{
+        Scanner sc = new Scanner (System.in);//esta variable leera
+        Iterator i;//iterara en el treemap
+        Grupo aux;//ayuda a guardar lo leido
+        i = agenda.keySet().iterator();
+        while (i.hasNext()) {
+            aux = (Grupo) i.next();//se guarda loo que se lee
+            if (aux.getNombre().compareTo(grupo) == 0) {//se compara que el nombre del grupo leido sea igua al nombre del grupo buscado
+                 System.out.println("\t>Nuevos datos para el grupo: ");//si es igual pide los nuevos datos
+                 System.out.println("\t>Nuevo nombre: ");
+                 aux.setNombre(sc.nextLine());//cambia el nombre
+                 System.out.println("\t>Nueva descripcion: ");
+                 aux.setDescripcion(sc.nextLine());//cambia la descripcion
+                 return true;//retorna verdadero si se cambio
+            }
+        }
+        throw new ExcepcionGrupo();//si no se encuentra lanza la excepcion
+    }
+    
 //Metodo para insertar contactos cuando se crea un grupo
     public void insertarContactos(Grupo grupo) {
         Contacto contacto;
@@ -149,7 +174,12 @@ public class Agenda {
         throw new ExcepcionContactos();
 
     }
-//Menu donde se muestran las opciones de la agenda
+    
+    
+    
+    
+    
+//-------------------------------------------------------Menu donde se muestran las opciones de la agenda
     public void menu() {
         Scanner teclado = new Scanner(System.in);
         int opc;
@@ -291,10 +321,23 @@ public class Agenda {
 
             case 10://Modificar un grupo.
                 
+                System.out.println("Ingresa el nombre del grupo: ");
+                stAux = teclado.nextLine();
+                try {
+                    if(modGrupo(stAux))
+                        System.out.println("Moficado correctamente");
+                    else
+                        System.out.println("No se pudo modificar el grupo");
+                    
+                } catch (ExcepcionGrupo ex) {
+                    ex.grupoNoEncontrado();
+                }
                 break;
-
+                
+                
             case 11://Modificar un contacto
-                break;
+                
+            break;
 
             case 12://ver todo
                 mostrarTodo();

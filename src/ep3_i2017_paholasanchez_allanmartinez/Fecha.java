@@ -97,9 +97,9 @@ class Fecha implements Comparable {
     }
 
     @Override
-    public int compareTo(Object t) {
-        return  1;
+    public int compareTo(Object o) {
+       return 1; 
     }
-    
+
     
 }
