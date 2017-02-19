@@ -84,6 +84,7 @@ class Fecha implements ManejoDatos {
         return hash;
     }
 
+    //metodo para almacenar los datos de la fecha
     @Override
     public void ingresarDatos() {
         Scanner teclado = new Scanner(System.in);
@@ -116,11 +117,15 @@ class Fecha implements ManejoDatos {
 
     }
 
+    
+    //muestra la fecha ingresada
     @Override
     public void mostrarDatos() {
         System.out.println("\t\t- Fecha: " + dia + "-" + "mes" + mes + "año" + "-" + anio);
     }
 
+    
+    //metodo que sirve para modificar alguno de los datos de la fecha
     @Override
     public void modificarDatos() {
         Scanner t = new Scanner(System.in);

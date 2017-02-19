@@ -86,7 +86,7 @@ public class Contacto implements Comparable,ManejoDatos {
     }
 
     @Override
-    public void mostrarDatos() {//muestar los datos almacenados del conacto
+    public void mostrarDatos() {//muestar los datos almacenados del contacto
         System.out.println("\t\t INFORMACION DEL CONTACTO: ");
         System.out.println("\t\t- Nombre contacto: " + nombre);
         System.out.println("\t\t- Apellido contacto: " + apellido);
@@ -180,7 +180,7 @@ public class Contacto implements Comparable,ManejoDatos {
     
     
     @Override
-    public int compareTo(Object t) {//comapra los apellidos y nombre, para colocarlos en orden alfabetico
+    public int compareTo(Object t) {//compara los apellidos y nombre, para colocarlos en orden alfabetico
         if (apellido.compareTo(((Contacto) t).apellido) > 0) {
             return 1;
         } else {

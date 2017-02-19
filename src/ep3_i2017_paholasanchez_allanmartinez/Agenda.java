@@ -82,7 +82,7 @@ public class Agenda {
         throw new ExcepcionContactos();
     }
 
-//Metodfo para buscar un grupo en la agenda y lo retorna.
+//Metodo para buscar un grupo en la agenda y lo retorna.
     public Grupo buscarGrupo(String grupo) throws ExcepcionGrupo {
         Iterator i;
         Grupo aux;
@@ -96,6 +96,7 @@ public class Agenda {
         throw new ExcepcionGrupo();
     }
 
+    //metodo ára modificar un grupo
     public boolean modGrupo(String grupo) throws ExcepcionGrupo {
         Scanner sc = new Scanner(System.in);//esta variable leera
         Iterator i;//iterara en el treemap
@@ -179,7 +180,7 @@ public class Agenda {
         throw new ExcepcionContactos();
 
     }
-
+//metodo que sirve para mofocar los datos de un contacto
     public boolean modificarContacto(Grupo grupo, Contacto contacto) throws ExcepcionContactos {
         if (agenda.get(grupo).contains(contacto)) {
             Iterator<Contacto> i = agenda.get(grupo).iterator();
@@ -405,7 +406,7 @@ public class Agenda {
         }
         imprimirContactosEspecial(arbol, "sin repetir encontrados: ");
     }
-//Metodo para imprimir un arbol con co0ntactos en especifico
+//Metodo para imprimir un arbol con contactos en especifico
 
     public void imprimirContactosEspecial(TreeSet<Contacto> arbol, String enunciado) {
         System.out.println("Los contactos " + enunciado + " :\n");
@@ -481,6 +482,9 @@ public class Agenda {
             auxCont.mostrarDatos();
         }
     }
+    
+    
+    //metodo para consultar contacto, ingresando la fecha de nacimiento
     public void mostrarContactosFecha(Fecha fecha){
         Iterator<Grupo> i=agenda.keySet().iterator();
         Iterator<Contacto> j;
