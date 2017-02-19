@@ -14,7 +14,7 @@ package ep3_i2017_paholasanchez_allanmartinez;
  *
  * @author axel
  */
-public class ExcepcionGrupo extends Exception {
+public class ExcepcionGrupo extends Exception {//excepcion para le grupo
 
     public ExcepcionGrupo() {
     }

@@ -23,7 +23,7 @@ public class EP3_I2017_PaholaSanchez_AllanMartinez {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Agenda agendaCont= new Agenda();
+        Agenda agendaCont= new Agenda();//manda a traer a la clase principal-> Agenda
         agendaCont.menu();
     }
     

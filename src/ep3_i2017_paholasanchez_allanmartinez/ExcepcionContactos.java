@@ -14,7 +14,7 @@ package ep3_i2017_paholasanchez_allanmartinez;
  *
  * @author axel
  */
-public class ExcepcionContactos extends Exception {
+public class ExcepcionContactos extends Exception {//excepciones de contacto
 
     /**
      * Creates a new instance of <code>ExcepcionContactos</code> without detail

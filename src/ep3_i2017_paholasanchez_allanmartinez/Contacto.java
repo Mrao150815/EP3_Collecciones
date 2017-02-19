@@ -58,38 +58,36 @@ public class Contacto implements Comparable,ManejoDatos {
     }
 
     @Override
-    public void ingresarDatos() {
+    public void ingresarDatos() {//ingresa y gurada toda la informacion del contacto
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingresa el nombre del contacto");
+        System.out.println("\t\t> Ingresa el nombre del contacto: ");
         nombre = teclado.nextLine();
-        System.out.println("Ingresa el apellido del contacto");
+        System.out.println("\t\t> Ingresa el apellido del contacto: ");
         apellido = teclado.nextLine();
-        System.out.println("Ingresa la fecha de nacimiento");
+        System.out.println("\t\t> Ingresa la fecha de nacimiento de "+nombre+" :");
         fechaNac.ingresarDatos();
-        System.out.println("Ingresa el correo de: "+ nombre);
-       correo=teclado.nextLine();
-       //El num de contactacto contiene letras0
-       System.out.println("Ingresa el numero fijo");
-       numTelefono=teclado.nextLine();
-       System.out.println("Ingresa el numero celular");
-       numCelular=teclado.nextLine();
-       System.out.println("Ingresa la fecha de nacimiento");
-       //Hacer el metodo para ingresar fecha en la clase fecha
-       System.out.println("Ingresa la direccion de: "+nombre);
-       direccion=teclado.nextLine();
-       System.out.println("Ingresa la deuda del contacto");
-       deuda=teclado.nextFloat();
-       //Que los datos ingresados en el sexo sean diferentes a M o F 
-       System.out.println("Ingresa el sexo F (femenino) o M (masculino)");
-        try {
-            sexo=(char) System.in.read();
-        } catch (IOException ex) {
-            Logger.getLogger(Contacto.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        System.out.println("\t\t> Ingresa el correo de "+ nombre+" :");
+        correo=teclado.nextLine();
+        System.out.println("\t\t> Ingresa el numero fijo");
+        numTelefono=teclado.nextLine();
+        System.out.println("\t\t> Ingresa el numero celular");
+        numCelular=teclado.nextLine();
+        System.out.println("\t\t> Ingresa la direccion de "+nombre+" :");
+        direccion=teclado.nextLine();
+        System.out.println("\t\t> Ingresa la deuda del contacto: ");
+        deuda=teclado.nextFloat();
+        //los datos ingresados en el sexo sean diferentes a M o F 
+        System.out.println("\t\t> Ingresa el sexo F (femenino) o M (masculino): ");
+         try {
+             sexo=(char) System.in.read();
+         } catch (IOException ex) {
+             Logger.getLogger(Contacto.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }
 
     @Override
-    public void mostrarDatos() {
+    public void mostrarDatos() {//muestar los datos almacenados del conacto
+        System.out.println("\t\t INFORMACION DEL CONTACTO: ");
         System.out.println("\t\t- Nombre contacto: " + nombre);
         System.out.println("\t\t- Apellido contacto: " + apellido);
         System.out.println("\t\t- Correo: "+correo);
@@ -173,13 +171,16 @@ public class Contacto implements Comparable,ManejoDatos {
         this.direccion = direccion;
     }
 
-    @Override
-    public String toString() {
-        return "Contacto{" + "nombre=" + nombre + ", apellido=" + apellido;
-    }
 
     @Override
-    public int compareTo(Object t) {
+    public String toString() {
+        return "Contacto{" + "nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", numTelefono=" + numTelefono + ", numCelular=" + numCelular + ", fechaNac=" + fechaNac + ", deuda=" + deuda + ", sexo=" + sexo + ", direccion=" + direccion + '}';
+    }
+
+    
+    
+    @Override
+    public int compareTo(Object t) {//comapra los apellidos y nombre, para colocarlos en orden alfabetico
         if (apellido.compareTo(((Contacto) t).apellido) > 0) {
             return 1;
         } else {
@@ -218,27 +219,30 @@ public class Contacto implements Comparable,ManejoDatos {
         return false;
     }
 
-    public void menuModificar(){
-        System.out.println("Escoge una opcion para modificar");
-        System.out.println("1.- Nombre");
-        System.out.println("2.- Apellido");
-        System.out.println("3.- Correo");
-        System.out.println("4.- Telefono fijo");
-        System.out.println("5.- Telefono celular");
-        System.out.println("6.- Fecha de Nacimiento");
-        System.out.println("7.- Deuda ");
-        System.out.println("8.- Sexo");
-        System.out.println("9.- Direccion");
+    public void menuModificar(){//sub menu auxiliar: este menu sirve para mostrarselo al usuario para pueda escoger cual info. quiere modificar
+        System.out.println("ESCOGE UNA OPCION A MODOFCAR: ");
+        System.out.println("\t\t|\t1. Nombre.                   |");
+        System.out.println("\t\t|\t2. Apellido.                 |");
+        System.out.println("\t\t|\t3. Correo.                   |");
+        System.out.println("\t\t|\t4. Telefono fijo.            |");
+        System.out.println("\t\t|\t5. Telefono celular.         |");
+        System.out.println("\t\t|\t6. Fecha de Nacimiento.      |");
+        System.out.println("\t\t|\t7. Deuda.                    |");
+        System.out.println("\t\t|\t8. Sexo.                     |");
+        System.out.println("\t\t|\t9. Direccion.                |");
+        System.out.println("\t\t|\t0. Salir.                    |");
     }
+    
+    
     @Override
-    public void modificarDatos() {
+    public void modificarDatos() {//segun sea la opcion seleccionada en el metodo de meuModoficar ira a su caso correspondiente
        Scanner teclado= new Scanner(System.in);
        Scanner teclado2=new Scanner(System.in);
        int opc;
        do{
        menuModificar();
        opc=teclado2.nextInt();
-           switch (opc){
+           switch (opc){//pide y guarda lo nuevos datos
                case 1:
                    System.out.println("Ingresa el nuevo nombre");
                    setNombre(teclado.nextLine());
@@ -283,12 +287,12 @@ public class Contacto implements Comparable,ManejoDatos {
                    setDireccion(teclado.nextLine());
                    break;
                case 0:
-                   System.out.println("Saliedno...");
+                   System.out.println("Saliendo...");
                    break;
                default:
                    System.err.println("Opcion Incorrecta");
            }
-       }while(opc!=0);
+       }while(opc!=0);//este menu se repetira hasta que la opcion sea 0
     }
 
 }

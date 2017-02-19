@@ -18,22 +18,25 @@ import java.util.Scanner;
  * @author PC21
  */
 public class Grupo implements Comparable,ManejoDatos {
+    //caracteristicas que tendra el grupo
     private String nombre;
     private String descripcion;
 
     public Grupo() {
     }
+    
     @Override
-    public void ingresarDatos(){
+    public void ingresarDatos(){//pide y guarda todos los datos del grupo
         Scanner teclado=new Scanner(System.in);
-        System.out.println("Ingresa el nombre del grupo");
+        System.out.println("\n\n\t\t\t> Ingresa el nombre del grupo: ");
         nombre=teclado.nextLine();
-        System.out.println("Ingresa una descripcion");
+        System.out.println("\t\t\t> Ingresa una descripcion: ");
         descripcion=teclado.nextLine();
     }
+    
     @Override
-    public void mostrarDatos(){
-        System.out.println("\tNombre grupo: "+nombre);
+    public void mostrarDatos(){//sirve para mostrar los datos que tiene el grupo
+        System.out.println("\n\n\tNombre grupo: "+nombre);
         System.out.println("\tDescripcion grupo:"+descripcion+"\n");
         
         
@@ -45,7 +48,7 @@ public class Grupo implements Comparable,ManejoDatos {
 
     @Override
     public String toString() {
-        return "Grupo{" + "nombre=" + nombre + ", descripcion=" + descripcion + '}';
+        return "Grupo{" + "nombre=" + nombre + ", descripcion=" + descripcion + "}\n";
     }
 
     @Override
@@ -65,7 +68,7 @@ public class Grupo implements Comparable,ManejoDatos {
         }
         return false;
     }
-    
+    //set y get de los atributos
     public String getNombre() {
         return nombre;
     }

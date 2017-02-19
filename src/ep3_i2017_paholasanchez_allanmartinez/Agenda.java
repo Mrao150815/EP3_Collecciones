@@ -1,3 +1,4 @@
+
 /*
     Evidencia de producto 3 "Estructuras dinamicas" uso de colecciones.
     Fundamentos de Programación Orientada a Objetos
@@ -66,7 +67,8 @@ public class Agenda {
         Contacto aux, aux2;
         Iterator<Contacto> i;
         String apellido, nombre;
-        System.out.println("\t\t>Ingresa el nombre del contacto: ");
+        System.out.println("\t\t\tBUSCAR UN CONTACTO\n");
+        System.out.println("\n\t\t>Ingresa el nombre del contacto: ");
         nombre = teclado.nextLine();
         System.out.println("\t\t>Ingresa el apellido del contacto: ");
         apellido = teclado.nextLine();
@@ -102,10 +104,10 @@ public class Agenda {
         while (i.hasNext()) {
             aux = (Grupo) i.next();//se guarda loo que se lee
             if (aux.getNombre().compareTo(grupo) == 0) {//se compara que el nombre del grupo leido sea igua al nombre del grupo buscado
-                System.out.println("\tNuevos datos para el grupo: ");//si es igual pide los nuevos datos
-                System.out.println("\tNuevo nombre: ");
+                System.out.println("\n\n\n\tNuevos datos para el grupo: ");//si es igual pide los nuevos datos
+                System.out.println("\t\t>Nuevo nombre: ");
                 aux.setNombre(sc.nextLine());//cambia el nombre
-                System.out.println("\tNueva descripcion: ");
+                System.out.println("\t\t>Nueva descripcion: ");
                 aux.setDescripcion(sc.nextLine());//cambia la descripcion
                 return true;//retorna verdadero si se cambio
             }
@@ -120,8 +122,8 @@ public class Agenda {
         int opc;
         try {
             do {
-                System.out.println("1.- Añadir un contacto");
-                System.out.println("0- Salir");
+                System.out.println("\t\t\t| 1. Añadir un contacto.     |");
+                System.out.println("\t\t\t| 0. Salir.                  |");
                 opc = teclado.nextInt();
                 switch (opc) {
                     case 1:
@@ -169,7 +171,7 @@ public class Agenda {
 
             if (aux2.compareTo(aux) == 0) {
                 if (agenda.get(grupo).remove(aux2)) {
-                    System.out.println("El contacto se elimino, hay probabilidad que existan más");
+                    System.out.println("El contacto se elimino, hay probabilidad que existan más\n\n\n");
                 }
                 return true;
             }
@@ -241,7 +243,7 @@ public class Agenda {
             break;
 
             case 2://Agregar tarjeta de contacto a un grupo existente
-                System.out.println("Ingresa el nombre del grupo: ");
+                System.out.println("\t\t\t> Ingresa el nombre del grupo: ");
                 stAux = teclado.nextLine();
                  {
                     try {
@@ -261,7 +263,7 @@ public class Agenda {
                 break;
 
             case 3://Eliminar un grupo
-                System.out.println("Ingresa el nombre del grupo a borrar");
+                System.out.println("\t\t\t> Ingresa el nombre del grupo a borrar: ");
                 stAux = teclado.nextLine();
                  {
                     try {
@@ -269,9 +271,9 @@ public class Agenda {
                         System.out.println("Estas seguro que deseas borrarlo 1[SI] 0[NO]");
                         if (teclado.nextInt() != 0) {
                             agenda.remove(grAux);
-                            System.out.println("EL grupo ah sido eliminado");
+                            System.out.println("EL grupo ah sido eliminado\n\n");
                         } else {
-                            System.err.println("El grupo no se elimino");
+                            System.err.println("El grupo no se elimino!\n\n");
                         }
                     } catch (ExcepcionGrupo ex) {
                         ex.grupoNoEncontrado();
@@ -280,14 +282,14 @@ public class Agenda {
                 break;
 
             case 4://Eliminar una tarjeta de grupo
-                System.out.println("Ingresa el nombre del grupo");
+                System.out.println("\t\t\t> Ingresa el nombre del grupo: ");
                 stAux = teclado.nextLine();
                  {
                     try {
                         grAux = buscarGrupo(stAux);
-                        System.out.println("Ingresa el nombre del contacto:");
+                        System.out.println("\t\t\t> Ingresa el nombre del contacto: ");
                         stAux1 = teclado.nextLine();
-                        System.out.println("Ingresa el apellido del contacto");
+                        System.out.println("\t\t\t> Ingresa el apellido del contacto: ");
                         stAux2 = teclado.nextLine();
                         eliminarContacto(grAux, stAux1, stAux2);
                     } catch (ExcepcionGrupo ex) {

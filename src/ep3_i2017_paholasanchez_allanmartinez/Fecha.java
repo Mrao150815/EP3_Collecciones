@@ -87,63 +87,63 @@ class Fecha implements ManejoDatos {
     @Override
     public void ingresarDatos() {
         Scanner teclado = new Scanner(System.in);
-        System.out.printf("\t\t>Mes: ");
+        System.out.printf("\t\t\t>Mes: ");
         mes = teclado.nextInt();
         if (mes >= 1 && mes <= 12) {//valida que el mes este dentro del rango
-            System.out.printf("\t\t>Dia: ");
+            System.out.printf("\t\t\t>Dia: ");
             dia = teclado.nextInt();
             if (dia >= 1 && dia <= 31) {
-                System.out.printf("\t\t>Año: ");
+                System.out.printf("\t\t\t>Año: ");
                 anio = teclado.nextInt();
                 if (anio >= ANIOZERO && anio <= ANIOACTUAL) {
-                    System.out.printf("Fecha correcta");
+                    System.out.printf("\t\t\t\t-Fecha Valida\n");
                 } else {
-                    System.out.printf("Problema en año: Fecha invalida\n");
+                    System.out.printf("\t\tProblema en año: Fecha invalida\n");
                     //pone los 0 en la fecha, para que no tenga el dia, mes y año ingresado
                     dia = 0;
                     mes = 0;
                     anio = 0;
                 }
             } else {
-                System.out.printf("Problema en dia: Fecha invalida\n");
+                System.out.printf("\t\tProblema en dia: Fecha invalida\n");
                 dia = 0;
                 mes = 0;
             }
         } else {
             mes = 0;//es para que no tenga el dato ingresado
-            System.out.printf("Problema en dia: Fecha invalida\n");
+            System.out.printf("\t\tProblema en dia: Fecha invalida\n");
         }
 
     }
 
     @Override
     public void mostrarDatos() {
-        System.out.println("Fecha: " + dia + "-" + "mes" + mes + "año" + "-" + anio);
+        System.out.println("\t\t- Fecha: " + dia + "-" + "mes" + mes + "año" + "-" + anio);
     }
 
     @Override
     public void modificarDatos() {
         Scanner t = new Scanner(System.in);
-        System.out.println("Escoge una opcion para modificar ");
-        System.out.println("1.- Año");
-        System.out.println("2.- Mes");
-        System.out.println("3.- Dia");
+        System.out.println("\n\n\nEscoge una opcion para modificar ");
+        System.out.println("\t\t\t\t |  1. Año.     |");
+        System.out.println("\t\t\t\t |  2. Mes.     |");
+        System.out.println("\t\t\t\t |  3. Dia.     |");
         switch (t.nextInt()) {
             case 1:
-                System.out.println("Ingresa el nuevo anio ");
+                System.out.println("\t\t\t>Ingresa el nuevo anio: ");
                 setAnio(t.nextInt());
                 break;
             case 2:
-                System.out.println("Ingresa el nuevo mes");
+                System.out.println("\t\t\t>Ingresa el nuevo mes: ");
                 setMes(t.nextInt());
                 break;
             case 3:
-                System.out.println("Ingresa el nuevo dia ");
+                System.out.println("\t\t\t>Ingresa el nuevo dia: ");
                 setDia(t.nextInt());
                 break;
 
             default:
-                System.out.println("Opcion Incorrecta");
+                System.out.println("\t\t\t --- ¡OPCION INCORRECTA !");
         }
     }
 

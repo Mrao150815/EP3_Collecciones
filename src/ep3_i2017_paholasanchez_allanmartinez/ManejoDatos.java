@@ -15,6 +15,7 @@ package ep3_i2017_paholasanchez_allanmartinez;
  * @author axel
  */
 public interface ManejoDatos {
+    //metodos a implementar en las clases
     public void ingresarDatos();
     public void mostrarDatos();
     public void modificarDatos();
